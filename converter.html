@@ -1,0 +1,69 @@
+<html>
+<head>
+<style type="text/css">
+  body {
+      margin: 0;
+      padding: 0;
+  }
+  textarea {
+      width: 48%;
+      height: 90%;
+  }
+</style>
+<script type="text/javascript">
+var rules = [
+    {
+        "re": /\[URL=.(.*?).\]([\s\S]*?)\[\/URL\]/ig,
+        'result': "[$1 $2]"
+    },
+    {
+        "re": /\[color=(#[a-fA-F\d]*)\]([\s\S]*?)\[\/color\]/ig,
+        "result": '<span style="color:$1">$2</span>'
+    },
+    {
+        "re": /\[b\]([\s\S]*?)\[\/b\]/ig,
+        "result": "'''$1'''"
+    },
+    {
+        "re": /\[i\]([\s\S]*?)\[\/i\]/ig,
+        "result": "''$1''"
+    },
+    {
+        "re": /\[s\]([\s\S]*?)\[\/s\]/ig,
+        "result": "<strike>$1</strike>"
+    },
+    {
+        "re": /\[U\]([\s\S]*?)\[\/U\]/ig,
+        "result": "<u>$1</u>"
+    },
+    {
+        "re": /\n/ig,
+        "result": "<br />\n"
+    },
+    {
+        "re": /<br \/>[\s\n]*<br \/>[\s\n]*/ig,
+        "result": "\n\n"
+    }
+
+];
+
+function bbcode_to_wiki(text) {
+    console.log(rules);
+    for (var i=0; i < rules.length; i++) {
+        text = text.replace(rules[i]["re"], rules[i]["result"]);
+    }
+    return text;
+}
+function convert_input() {
+    var input = document.getElementById("input");
+    var output = document.getElementById("output");
+    output.value = bbcode_to_wiki(input.value);
+}
+</script>
+</head>
+<body>
+<button id="run_convert" onclick="convert_input()">BBCode to Wiki markup</button></br>
+<textarea id="input" ></textarea>
+<textarea id="output" ></textarea>
+</body>
+</html>
