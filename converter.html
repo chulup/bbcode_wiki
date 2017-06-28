@@ -43,6 +43,43 @@ var rules = [
     {
         "re": /<br \/>[\s\n]*<br \/>[\s\n]*/ig,
         "result": "\n\n"
+    },
+    {   // Remove [QUOTE] and [/QUOTE], [LIST] and [/LIST]
+        "re": /\[\/?(QUOTE|LIST).*?\](<br \/>)?\n/ig,
+        "result": "\n"
+    },
+    {   // Change [*] to *
+        "re": /\[\*\](.*?)(<br \/>)?\n/ig,
+        "result": "* $1\n"
+    },
+    {   // Remove [LIST] and [/LIST]
+        "re": /\[\/?LIST\]/ig,
+        "result": ""
+    },
+
+    {   // Table start
+        "re": /\[xtable.*?\]\s*<br \/>/ig,
+        "result": '{|class="article-table"'
+    },
+    {   // Table end
+        "re": /\[\/xtable.*?\]\s*(<br \/>)?/ig,
+        "result": '|}'
+    },
+    {   // Table header columns
+        "re": /{th.*?}(.*?){\/th}\s*<br \/>/ig,
+        "result": "! $1"
+    },
+    {   // Table row start
+        "re": /{(tr|\/?tbody)}\s*(<br \/>)?\n?/ig,
+        "result": ""
+    },
+    {   // Table row end
+        "re": /{\/tr}\s*<br \/>/ig,
+        "result": "|-",
+    },
+    {   // Table columns
+        "re": /{td.*?}(.*?){\/td}\s*<br \/>/ig,
+        "result": "| $1"
     }
 
 ];
