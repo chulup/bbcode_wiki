@@ -65,10 +65,6 @@ var rules = [
         "re": /\[\/xtable.*?\]\s*(<br \/>)?/ig,
         "result": '|}'
     },
-    {   // Table header columns
-        "re": /{th.*?}([^{]*?){\/th}\s*<br \/>/ig,
-        "result": "! $1"
-    },
     {   // Table row start
         "re": /{tr.*?}\s*(<br \/>)?\n?/ig,
         "result": ""
@@ -77,15 +73,18 @@ var rules = [
         "re": /{(\/tr|\/?tbody|\|?thead)}\s*<br \/>/ig,
         "result": "|-",
     },
+    {   // Table header columns
+        "re": /{th.*?}([^{]*?){\/th}\s*<br \/>/ig,
+        "result": "! $1"
+    },
     {   // Table columns
-        "re": /{td.*?}(.*?){\/td}\s*<br \/>/ig,
+        "re": /{td.*?}([^{]*?){\/td}\s*<br \/>/ig,
         "result": "| $1"
     }
 
 ];
 
 function bbcode_to_wiki(text) {
-    console.log(rules);
     for (var i=0; i < rules.length; i++) {
         text = text.replace(rules[i]["re"], rules[i]["result"]);
     }
