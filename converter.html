@@ -45,7 +45,7 @@ var rules = [
         "result": "\n\n"
     },
     {   // Remove [QUOTE] and [/QUOTE], [LIST] and [/LIST]
-        "re": /\[\/?(QUOTE|LIST).*?\](<br \/>)?\n/ig,
+        "re": /\[\/?(QUOTE|LIST)[^[]*?\](<br \/>)?\n?/ig,
         "result": "\n"
     },
     {   // Change [*] to *
