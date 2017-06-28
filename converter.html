@@ -66,15 +66,15 @@ var rules = [
         "result": '|}'
     },
     {   // Table header columns
-        "re": /{th.*?}(.*?){\/th}\s*<br \/>/ig,
+        "re": /{th.*?}([^{]*?){\/th}\s*<br \/>/ig,
         "result": "! $1"
     },
     {   // Table row start
-        "re": /{(tr|\/?tbody)}\s*(<br \/>)?\n?/ig,
+        "re": /{tr.*?}\s*(<br \/>)?\n?/ig,
         "result": ""
     },
     {   // Table row end
-        "re": /{\/tr}\s*<br \/>/ig,
+        "re": /{(\/tr|\/?tbody|\|?thead)}\s*<br \/>/ig,
         "result": "|-",
     },
     {   // Table columns
